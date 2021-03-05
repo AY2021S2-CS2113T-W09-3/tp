@@ -16,7 +16,7 @@ public class ModuleList {
             //unable to find
             return false;
         }
-        selectedModule = storage.loadModule(name);
+        //selectedModule = storage.loadModule(name);
         return true;
     }
 

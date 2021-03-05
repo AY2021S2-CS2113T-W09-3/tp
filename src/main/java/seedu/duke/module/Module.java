@@ -7,15 +7,15 @@ import java.util.ArrayList;
 
 public class Module {
 
-    private final String MODULE_CODE;
+    private final String moduleCode;
     public final ArrayList<Lesson> lessonList = new ArrayList<>();
     public final ArrayList<Task> taskList = new ArrayList<>();
 
     public Module(String moduleCode) {
-        MODULE_CODE = moduleCode;
+        this.moduleCode = moduleCode;
     }
 
     public String getModuleCode() {
-        return MODULE_CODE;
+        return moduleCode;
     }
 }
