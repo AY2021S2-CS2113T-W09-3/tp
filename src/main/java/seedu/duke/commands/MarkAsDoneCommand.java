@@ -16,8 +16,8 @@ public class MarkAsDoneCommand extends Command {
     // Extracts undone tasks as a new list, shows the list to the user and obtains their
     // chosen tasks. Then, marks each of these tasks as done in the actual list.
     @Override
-    public void execute(ModuleList modules, UI ui) throws CommandException {
-        Module module = modules.getSelectedModule();
+    public void execute(UI ui) throws CommandException {
+        Module module = ModuleList.getSelectedModule();
         ArrayList<Task> undoneTasks = ui.getFilteredTasks(module.getTaskList(), false);
         ui.printGetChosenTasksPrompt(MESSAGE_TASKS_TO_MARK, COMMAND_VERB_MARK, undoneTasks);
         ArrayList<Task> chosenTasks = ui.getChosenTasks(undoneTasks);
@@ -27,6 +27,7 @@ public class MarkAsDoneCommand extends Command {
             ui.printStatement(confirmation);
             module.markTaskInList(task);
         }
+        ModuleList.writeModule();
     }
 
     @Override

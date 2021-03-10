@@ -16,10 +16,10 @@ public class DeleteModuleCommand extends Command {
             + "Separate indices with a blank space.";
     public static final String MESSAGE_SUCCESS = "Removed %s from the module list.";
 
-    private String firstStage(ModuleList modules) {
+    private String firstStage() {
         StringBuilder sb = new StringBuilder(MESSAGE_PROMPT1);
-        for (String moduleCode : modules.getModules()) {
-            int moduleNumber = modules.getModules().indexOf(moduleCode) + 1;
+        for (String moduleCode : ModuleList.getModules()) {
+            int moduleNumber = ModuleList.getModules().indexOf(moduleCode) + 1;
             sb.append(String.format(Messages.FORMAT_LIST_ITEMS, moduleNumber, moduleCode));
             sb.append("\n");
         }
@@ -37,15 +37,14 @@ public class DeleteModuleCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList modules, UI ui) throws CommandException {
-        requireNonNull(modules);
+    public void execute(UI ui) throws CommandException {
 
-        String firstStageMessage = firstStage(modules);
+        String firstStageMessage = firstStage();
         ui.printMessage(firstStageMessage);
 
         // TODO validate list of integers. Assume input is valid for now.
         ArrayList<Integer> integers = ui.readIntegers();
-        ArrayList<String> deletedModules = modules.deleteModules(integers);
+        ArrayList<String> deletedModules = ModuleList.deleteModules(integers);
 
         String secondStageMessage = secondStage(deletedModules);
         ui.printMessage(secondStageMessage);

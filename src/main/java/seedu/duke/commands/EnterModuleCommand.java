@@ -9,7 +9,6 @@ import static java.util.Objects.requireNonNull;
 
 public class EnterModuleCommand extends Command {
 
-    public static final String MESSAGE_INFO = "Opening %s.";
     public static final String MESSAGE_OVERVIEW = "<Placeholder for overview>";
     public static final String MESSAGE_ERROR = "%s is an invalid module code.";
 
@@ -20,14 +19,12 @@ public class EnterModuleCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList modules, UI ui) throws CommandException {
-        requireNonNull(modules);
-        if (!modules.getModules().contains(moduleCode)) {
-            throw new CommandException(String.format(MESSAGE_ERROR, moduleCode));
+    public void execute(UI ui) throws CommandException {
+        if (ModuleList.setSelectedModule(moduleCode)) {
+            ui.printMessage(MESSAGE_OVERVIEW);
+        } else {
+            ui.printMessage(String.format(MESSAGE_ERROR, moduleCode));
         }
-        ui.printMessage(String.format(MESSAGE_INFO, moduleCode));
-        ModuleList.selectedModule = new Module(moduleCode);
-        ui.printMessage(MESSAGE_OVERVIEW);
     }
 
     @Override

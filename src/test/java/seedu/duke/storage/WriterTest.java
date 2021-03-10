@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.lesson.Lesson;
 import seedu.duke.lesson.LessonType;
 import seedu.duke.lesson.TeachingStaff;
-import seedu.duke.module.Module;
 import seedu.duke.module.ModuleList;
 import seedu.duke.task.Task;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,12 +15,16 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.duke.storage.StorageConstants.FOLDER_PATH;
 
 class WriterTest {
 
     @Test
     void writeModule_noContentNoDirectory_instructionOnly() throws IOException {
-        ModuleList.selectedModule = new Module("CS2113T");
+        removeFiles();
+        ModuleList.loadModuleNames();
+        ModuleList.addModule("CS2113T");
+        ModuleList.setSelectedModule("CS2113T");
         Writer writer = new Writer();
         writer.writeModule();
         Path reference = Paths.get("src/test/java/seedu/duke/storage/reference/empty_reference.txt");
@@ -30,13 +34,16 @@ class WriterTest {
 
     @Test
     void writeModule_twoTask_instructionAndTask() throws IOException {
-        ModuleList.selectedModule = new Module("CS2113T");
+        removeFiles();
+        ModuleList.loadModuleNames();
+        ModuleList.addModule("CS2113T");
+        ModuleList.setSelectedModule("CS2113T");
         Task task1 = new Task("Task1", "Task1Remarks",
                 LocalDate.of(2020,2,20),false,false);
         Task task2 = new Task("Task2", "",
                 LocalDate.of(2021,12,12),true,true);
-        ModuleList.selectedModule.addTask(task1);
-        ModuleList.selectedModule.addTask(task2);
+        ModuleList.getSelectedModule().addTask(task1);
+        ModuleList.getSelectedModule().addTask(task2);
         Writer writer = new Writer();
         writer.writeModule();
         Path reference = Paths.get("src/test/java/seedu/duke/storage/reference/task_only_reference.txt");
@@ -46,13 +53,16 @@ class WriterTest {
 
     @Test
     void writeModule_twoLesson_instructionAndLesson() throws IOException {
-        ModuleList.selectedModule = new Module("CS2113T");
+        removeFiles();
+        ModuleList.loadModuleNames();
+        ModuleList.addModule("CS2113T");
+        ModuleList.setSelectedModule("CS2113T");
         Lesson lesson1 = new Lesson(LessonType.LECTURE, "Friday 2pm", "test.com",
                 new TeachingStaff("",""));
         Lesson lesson2 = new Lesson(LessonType.LECTURE, "Weekdays", "",
                 new TeachingStaff("Name2","Email2"));
-        ModuleList.selectedModule.addLesson(lesson1);
-        ModuleList.selectedModule.addLesson(lesson2);
+        ModuleList.getSelectedModule().addLesson(lesson1);
+        ModuleList.getSelectedModule().addLesson(lesson2);
         Writer writer = new Writer();
         writer.writeModule();
         Path reference = Paths.get("src/test/java/seedu/duke/storage/reference/lesson_only_reference.txt");
@@ -62,19 +72,22 @@ class WriterTest {
 
     @Test
     void writeModule_twoLessonTwoTask_allContent() throws IOException {
-        ModuleList.selectedModule = new Module("CS2113T");
+        removeFiles();
+        ModuleList.loadModuleNames();
+        ModuleList.addModule("CS2113T");
+        ModuleList.setSelectedModule("CS2113T");
         Lesson lesson1 = new Lesson(LessonType.LECTURE, "Friday 2pm", "test.com",
                 new TeachingStaff("",""));
         Lesson lesson2 = new Lesson(LessonType.LECTURE, "Weekdays", "",
                 new TeachingStaff("Name2","Email2"));
-        ModuleList.selectedModule.addLesson(lesson1);
-        ModuleList.selectedModule.addLesson(lesson2);
+        ModuleList.getSelectedModule().addLesson(lesson1);
+        ModuleList.getSelectedModule().addLesson(lesson2);
         Task task1 = new Task("Task1", "Task1Remarks",
                 LocalDate.of(2020,2,20),false,false);
         Task task2 = new Task("Task2", "",
                 LocalDate.of(2021,12,12),true,true);
-        ModuleList.selectedModule.addTask(task1);
-        ModuleList.selectedModule.addTask(task2);
+        ModuleList.getSelectedModule().addTask(task1);
+        ModuleList.getSelectedModule().addTask(task2);
         Writer writer = new Writer();
         writer.writeModule();
         Path reference = Paths.get("src/test/java/seedu/duke/storage/reference/all_content_reference.txt");
@@ -82,4 +95,15 @@ class WriterTest {
         assertEquals(Files.readAllLines(reference), Files.readAllLines(actual));
     }
 
+    private void removeFiles() {
+        File directory = new File(FOLDER_PATH);
+        File[] files = directory.listFiles();
+        if (files == null) {
+            return;
+        }
+        for (File file : files) {
+            file.delete();
+        }
+        directory.delete();
+    }
 }

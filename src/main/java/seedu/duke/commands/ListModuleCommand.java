@@ -12,12 +12,10 @@ public class ListModuleCommand extends Command {
     public static final String MESSAGE_INFO = "Modules in your list:\n";
 
     @Override
-    public void execute(ModuleList modules, UI ui) throws CommandException {
-        requireNonNull(modules);
-
+    public void execute(UI ui) throws CommandException {
         StringBuilder sb = new StringBuilder(MESSAGE_INFO);
-        for (String moduleCode : modules.getModules()) {
-            int moduleNumber = modules.getModules().indexOf(moduleCode) + 1;
+        for (String moduleCode : ModuleList.getModules()) {
+            int moduleNumber = ModuleList.getModules().indexOf(moduleCode) + 1;
             sb.append(String.format(Messages.FORMAT_LIST_ITEMS, moduleNumber, moduleCode));
             sb.append("\n");
         }

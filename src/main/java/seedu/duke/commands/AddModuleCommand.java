@@ -18,14 +18,12 @@ public class AddModuleCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList modules, UI ui) throws CommandException {
-        requireNonNull(modules);
-
-        if (modules.hasModuleCode(moduleCode)) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE, moduleCode));
+    public void execute(UI ui) throws CommandException {
+        if (ModuleList.addModule(moduleCode)) {
+            ui.printMessage(String.format(MESSAGE_SUCCESS, moduleCode));
+        } else {
+            ui.printMessage(String.format(MESSAGE_DUPLICATE, moduleCode));
         }
-        modules.addModule(moduleCode);
-        ui.printMessage(String.format(MESSAGE_SUCCESS, moduleCode));
     }
 
     @Override

@@ -14,13 +14,14 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList modules, UI ui) throws CommandException {
-        Module module = modules.getSelectedModule();
+    public void execute(UI ui) throws CommandException {
+        Module module = ModuleList.getSelectedModule();
         boolean isGraded = ui.getIsTaskGraded();
         task.setGraded(isGraded);
         module.addTaskToList(task);
         String confirmation = "Added " + task.getDescription() + ".";
         ui.printStatement(confirmation);
+        ModuleList.writeModule();
     }
 
     @Override

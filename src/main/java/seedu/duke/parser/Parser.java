@@ -1,6 +1,5 @@
 package seedu.duke.parser;
 
-import seedu.duke.commands.Command;
 import seedu.duke.commands.AddLessonCommand;
 import seedu.duke.commands.AddModuleCommand;
 import seedu.duke.commands.AddTaskCommand;
@@ -9,6 +8,7 @@ import seedu.duke.commands.DeleteLessonCommand;
 import seedu.duke.commands.DeleteModuleCommand;
 import seedu.duke.commands.DeleteTaskCommand;
 import seedu.duke.commands.EnterModuleCommand;
+import seedu.duke.commands.ExitModuleCommand;
 import seedu.duke.commands.ExitProgramCommand;
 import seedu.duke.commands.ListLessonsCommand;
 import seedu.duke.commands.ListModuleCommand;
@@ -18,7 +18,6 @@ import seedu.duke.commands.MarkAsUndoneCommand;
 import seedu.duke.commands.OpenLessonLinkCommand;
 import seedu.duke.commands.PrintHelpCommand;
 import seedu.duke.commands.ViewTeachingStaffCommand;
-
 import seedu.duke.exception.UnknownCommandException;
 import seedu.duke.lesson.Lesson;
 import seedu.duke.lesson.LessonType;
@@ -68,7 +67,6 @@ import static seedu.duke.common.ParserConstants.UNMARK_DONE;
 import static seedu.duke.common.ParserConstants.WHITESPACE;
 
 
-import java.util.ArrayList;
 
 public class Parser {
 
@@ -133,7 +131,7 @@ public class Parser {
             return PRINT_HELP;
         } else if (input.equalsIgnoreCase("exit")) {
             return EXIT_PROGRAM;
-        } else if (input.equalsIgnoreCase("list")) {
+        } else if (input.equalsIgnoreCase("modules")) {
             return LIST_MODULE;
         } else if (startsWith(input, "add")) {
             return ADD_MODULE;
@@ -165,7 +163,7 @@ public class Parser {
      * @return true if user has already entered a module, false otherwise
      */
     private boolean moduleIsSelected() {
-        return ModuleList.selectedModule != null;
+        return ModuleList.getSelectedModule() != null;
     }
 
     /**
@@ -207,8 +205,7 @@ public class Parser {
         case PRINT_HELP_MODULE:
             return new PrintHelpCommand();
         case EXIT_MODULE:
-            // TODO
-            return new PrintHelpCommand();
+            return new ExitModuleCommand();
         case LIST_MODULE_INFO:
             // TODO
             return new PrintHelpCommand();

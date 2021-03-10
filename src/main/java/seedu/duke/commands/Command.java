@@ -6,7 +6,7 @@ import seedu.duke.ui.UI;
 
 public abstract class Command {
 
-    public abstract void execute(ModuleList modules, UI ui) throws CommandException;
+    public abstract void execute(UI ui) throws CommandException;
 
     public abstract boolean isExit();
 

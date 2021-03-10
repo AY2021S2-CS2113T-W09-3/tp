@@ -13,13 +13,13 @@ import static java.util.Objects.requireNonNull;
 public class ModuleList {
 
     private static final ArrayList<String> modules = new ArrayList<>();
-    public static Module selectedModule;
+    private static Module selectedModule;
 
     public static Module getSelectedModule() {
         return selectedModule;
     }
 
-    public static ArrayList<String> getModuleList() {
+    public static ArrayList<String> getModules() {
         return modules;
     }
  
@@ -27,11 +27,10 @@ public class ModuleList {
     /**
      * Searches directory for module files.
      * Adds their name (excluding ".txt") to the module list.
-     *
-     * @param loader Instance of Loader class.
      */
-    public static void loadModuleNames(Loader loader) {
+    public static void loadModuleNames() {
         modules.clear();
+        Loader loader = new Loader();
         for (String name : loader.getModuleNames()) {
             insertModule(name);
         }
@@ -41,17 +40,15 @@ public class ModuleList {
     /**
      * Adds a new module to the module list and add create file for new module.
      *
-     * @param name Module name, excluding ".txt".
-     * @param writer Instance of Writer class.
+     * @param moduleCode Module name, excluding ".txt".
      */
-    public static void addModule(String name, Writer writer) {
-        if (insertModule(name)) {
-            writer.createFile(name);
+    public static boolean addModule(String moduleCode) {
+        if (insertModule(moduleCode)) {
+            Writer writer = new Writer();
+            writer.createFile(moduleCode);
+            return true;
         }
-    }
-    
-    public void addModule(String moduleCode) {
-        modules.add(moduleCode);
+        return false;
     }
 
     /**
@@ -74,14 +71,18 @@ public class ModuleList {
      *
      * @param index index of module to remove.
      */
-    public static void removeModule(int index, Writer writer) {
+    public static String removeModule(int index) {
         if (index < 0 || index >= modules.size()) {
-            return;
+            return " ";
         }
+        Writer writer = new Writer();
         if (writer.deleteFile(modules.get(index))) {
+            String moduleName = modules.get(index);
             modules.remove(index);
+            return moduleName;
         } else {
             //Unable to remove
+            return "";
         }
     }
 
@@ -92,7 +93,8 @@ public class ModuleList {
      * @param name Module name, excluding ".txt".
      * @return True if successful, false if unable to find file.
      */
-    public static boolean setSelectedModule(String name, Loader loader, Writer writer) {
+    public static boolean setSelectedModule(String name) {
+        Loader loader = new Loader();
         if (!modules.contains(name)) {
             //Unable to find file
             return false;
@@ -100,6 +102,7 @@ public class ModuleList {
         selectedModule = loader.loadModule(name);
         if (selectedModule != null) {
             //Remove invalid inputs
+            Writer writer = new Writer();
             writer.writeModule();
         }
         return selectedModule != null;
@@ -111,23 +114,30 @@ public class ModuleList {
      */
     public static void reset() {
         selectedModule = null;
-    }   
-  
-    public ArrayList<String> getModules() {
-        return modules;
     }
 
-    public boolean hasModuleCode(String moduleCode) {
-        requireNonNull(moduleCode);
-        return modules.contains(moduleCode);
+
+    /**
+     * Writes updated data to file of selected module.
+     */
+    public static void writeModule() {
+        Writer writer = new Writer();
+        writer.writeModule();
     }
 
-    public ArrayList<String> deleteModules(ArrayList<Integer> moduleNumbers) {
+
+    /**
+     * Deletes modules specified.
+     *
+     * @param moduleNumbers Index of modules to delete.
+     * @return List of names of modules that are deleted.
+     */
+    public static ArrayList<String> deleteModules(ArrayList<Integer> moduleNumbers) {
         ArrayList<String> deletedModules = new ArrayList<>();
         Collections.reverse(moduleNumbers);
         for (Integer moduleNumber : moduleNumbers) {
             int indexToRemove = moduleNumber - 1;
-            deletedModules.add(0, modules.remove(indexToRemove));
+            deletedModules.add(0, removeModule(indexToRemove));
         }
         return deletedModules;
     }

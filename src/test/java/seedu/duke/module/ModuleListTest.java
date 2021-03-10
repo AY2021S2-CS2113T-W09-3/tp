@@ -1,7 +1,6 @@
 package seedu.duke.module;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.storage.Loader;
 import seedu.duke.storage.Writer;
 
 import java.io.File;
@@ -21,8 +20,8 @@ class ModuleListTest {
     @Test
     void loadModuleNames_noDirectory_sizeZero() {
         removeFiles();
-        ModuleList.loadModuleNames(new Loader());
-        assertEquals(0, ModuleList.getModuleList().size());
+        ModuleList.loadModuleNames();
+        assertEquals(0, ModuleList.getModules().size());
     }
 
     @Test
@@ -32,8 +31,8 @@ class ModuleListTest {
         directory.mkdir();
         File file1 = new File(FOLDER_PATH + "/" + "CS2113T.img");
         file1.createNewFile();
-        ModuleList.loadModuleNames(new Loader());
-        assertEquals(0, ModuleList.getModuleList().size());
+        ModuleList.loadModuleNames();
+        assertEquals(0, ModuleList.getModules().size());
     }
 
     @Test
@@ -45,8 +44,8 @@ class ModuleListTest {
         file1.createNewFile();
         File file2 = new File(FOLDER_PATH + "/" + "CS2101" + TXT_FORMAT);
         file2.createNewFile();
-        ModuleList.loadModuleNames(new Loader());
-        assertEquals(2, ModuleList.getModuleList().size());
+        ModuleList.loadModuleNames();
+        assertEquals(2, ModuleList.getModules().size());
     }
 
     @Test
@@ -57,14 +56,14 @@ class ModuleListTest {
         File file1 = new File(FOLDER_PATH + "/" + "CS2113T" + TXT_FORMAT);
         file1.createNewFile();
         file1.createNewFile();
-        ModuleList.loadModuleNames(new Loader());
-        assertEquals(1, ModuleList.getModuleList().size());
+        ModuleList.loadModuleNames();
+        assertEquals(1, ModuleList.getModules().size());
     }
 
     @Test
     void setSelectedModule_validName_loadsModule() throws IOException {
         removeFiles();
-        ModuleList.loadModuleNames(new Loader());
+        ModuleList.loadModuleNames();
         ModuleList.reset();
         File directory = new File(FOLDER_PATH);
         directory.mkdir();
@@ -74,15 +73,15 @@ class ModuleListTest {
             Files.delete(destination);
         }
         Files.copy(reference, destination);
-        ModuleList.loadModuleNames(new Loader());
-        ModuleList.setSelectedModule("CS2113T", new Loader(), new Writer());
-        assertEquals(2, ModuleList.selectedModule.getTaskList().size());
+        ModuleList.loadModuleNames();
+        ModuleList.setSelectedModule("CS2113T");
+        assertEquals(2, ModuleList.getSelectedModule().getTaskList().size());
     }
 
     @Test
     void setSelectedModule_invalidName_remainNull() throws IOException {
         removeFiles();
-        ModuleList.loadModuleNames(new Loader());
+        ModuleList.loadModuleNames();
         ModuleList.reset();
         File directory = new File(FOLDER_PATH);
         directory.mkdir();
@@ -92,17 +91,17 @@ class ModuleListTest {
             Files.delete(destination);
         }
         Files.copy(reference, destination);
-        ModuleList.loadModuleNames(new Loader());
-        ModuleList.setSelectedModule("CS2100", new Loader(), new Writer());
+        ModuleList.loadModuleNames();
+        ModuleList.setSelectedModule("CS2100");
         assertThrows(NullPointerException.class, () -> {
-            ModuleList.selectedModule.getModuleCode();
+            ModuleList.getSelectedModule().getModuleCode();
         });
     }
 
     @Test
     void setSelectedModule_invalidFile_noTaskAndLesson() throws IOException {
         removeFiles();
-        ModuleList.loadModuleNames(new Loader());
+        ModuleList.loadModuleNames();
         ModuleList.reset();
         File directory = new File(FOLDER_PATH);
         directory.mkdir();
@@ -112,16 +111,16 @@ class ModuleListTest {
             Files.delete(destination);
         }
         Files.copy(reference, destination);
-        ModuleList.loadModuleNames(new Loader());
-        ModuleList.setSelectedModule("CS2113T", new Loader(), new Writer());
-        assertEquals(0,ModuleList.selectedModule.getTaskList().size());
-        assertEquals(0,ModuleList.selectedModule.getLessonList().size());
+        ModuleList.loadModuleNames();
+        ModuleList.setSelectedModule("CS2113T");
+        assertEquals(0,ModuleList.getSelectedModule().getTaskList().size());
+        assertEquals(0,ModuleList.getSelectedModule().getLessonList().size());
     }
 
     @Test
     void setSelectedModule_invalidContent_() throws IOException {
         removeFiles();
-        ModuleList.loadModuleNames(new Loader());
+        ModuleList.loadModuleNames();
         ModuleList.reset();
         File directory = new File(FOLDER_PATH);
         directory.mkdir();
@@ -131,25 +130,25 @@ class ModuleListTest {
             Files.delete(destination);
         }
         Files.copy(reference, destination);
-        ModuleList.loadModuleNames(new Loader());
-        ModuleList.setSelectedModule("CS2113T", new Loader(), new Writer());
-        assertEquals(3,ModuleList.selectedModule.getLessonList().size());
-        assertEquals(1,ModuleList.selectedModule.getTaskList().size());
+        ModuleList.loadModuleNames();
+        ModuleList.setSelectedModule("CS2113T");
+        assertEquals(3,ModuleList.getSelectedModule().getLessonList().size());
+        assertEquals(1,ModuleList.getSelectedModule().getTaskList().size());
     }
 
     @Test
     void addModule_twoDifferentModules_sizeTwo() throws IOException {
         removeFiles();
-        ModuleList.loadModuleNames(new Loader());
+        ModuleList.loadModuleNames();
         Writer writer = new Writer();
-        ModuleList.addModule("CS2101", writer);
-        ModuleList.addModule("CS2113T", writer);
+        ModuleList.addModule("CS2101");
+        ModuleList.addModule("CS2113T");
         Path reference = Paths.get("src/test/java/seedu/duke/storage/reference/empty_reference.txt");
         Path actual1 = Paths.get("Data/CS2113T.txt");
         Path actual2 = Paths.get("Data/CS2101.txt");
         boolean isExist = Files.exists(actual1) && Files.exists(actual2);
         boolean isIdentical = Files.readAllLines(reference).equals(Files.readAllLines(actual1));
-        boolean isTwo = ModuleList.getModuleList().size() == 2;
+        boolean isTwo = ModuleList.getModules().size() == 2;
         assertTrue(isExist);
         assertTrue(isIdentical);
         assertTrue(isTwo);
@@ -158,16 +157,16 @@ class ModuleListTest {
     @Test
     void addModule_twoSameModules_sizeOne() throws  IOException {
         removeFiles();
-        ModuleList.loadModuleNames(new Loader());
+        ModuleList.loadModuleNames();
         Writer writer = new Writer();
-        ModuleList.addModule("CS2113T", writer);
-        ModuleList.addModule("CS2113T", writer);
-        System.out.println(ModuleList.getModuleList().size());
+        ModuleList.addModule("CS2113T");
+        ModuleList.addModule("CS2113T");
+        System.out.println(ModuleList.getModules().size());
         Path reference = Paths.get("src/test/java/seedu/duke/storage/reference/empty_reference.txt");
         Path actual1 = Paths.get("Data/CS2113T.txt");
         boolean isExist = Files.exists(actual1);
         boolean isIdentical = Files.readAllLines(reference).equals(Files.readAllLines(reference));
-        boolean isOne = ModuleList.getModuleList().size() == 1;
+        boolean isOne = ModuleList.getModules().size() == 1;
         assertTrue(isExist);
         assertTrue(isIdentical);
         assertTrue(isOne);
@@ -176,47 +175,43 @@ class ModuleListTest {
     @Test
     void removeModule_validIndex_removes() {
         removeFiles();
-        ModuleList.loadModuleNames(new Loader());
-        Writer writer = new Writer();
-        ModuleList.addModule("CS2113T", writer);
-        ModuleList.addModule("CS2101", writer);
-        ModuleList.removeModule(1, writer);
-        assertEquals(1, ModuleList.getModuleList().size());
+        ModuleList.loadModuleNames();
+        ModuleList.addModule("CS2113T");
+        ModuleList.addModule("CS2101");
+        ModuleList.removeModule(1);
+        assertEquals(1, ModuleList.getModules().size());
     }
 
     @Test
     void removeModule_negativeIndex_noChange() {
         removeFiles();
-        ModuleList.loadModuleNames(new Loader());
-        Writer writer = new Writer();
-        ModuleList.addModule("CS2113T", writer);
-        ModuleList.addModule("CS2101", writer);
-        ModuleList.removeModule(-1, writer);
-        assertEquals(2, ModuleList.getModuleList().size());
+        ModuleList.loadModuleNames();
+        ModuleList.addModule("CS2113T");
+        ModuleList.addModule("CS2101");
+        ModuleList.removeModule(-1);
+        assertEquals(2, ModuleList.getModules().size());
     }
 
     @Test
     void removeModule_indexOutOfBounds_noChange() {
         removeFiles();
-        ModuleList.loadModuleNames(new Loader());
-        Writer writer = new Writer();
-        ModuleList.addModule("CS2113T", writer);
-        ModuleList.addModule("CS2101", writer);
-        ModuleList.removeModule(2, writer);
-        assertEquals(2, ModuleList.getModuleList().size());
+        ModuleList.loadModuleNames();
+        ModuleList.addModule("CS2113T");
+        ModuleList.addModule("CS2101");
+        ModuleList.removeModule(2);
+        assertEquals(2, ModuleList.getModules().size());
     }
 
     @Test
     void addRemoveAddModule_SameModule_sizeOne() {
         removeFiles();
-        ModuleList.loadModuleNames(new Loader());
-        Writer writer = new Writer();
-        ModuleList.addModule("CS2101", writer);
-        assertEquals(1, ModuleList.getModuleList().size());
-        ModuleList.removeModule(0, writer);
-        assertEquals(0, ModuleList.getModuleList().size());
-        ModuleList.addModule("CS2101", writer);
-        assertEquals(1, ModuleList.getModuleList().size());
+        ModuleList.loadModuleNames();
+        ModuleList.addModule("CS2101");
+        assertEquals(1, ModuleList.getModules().size());
+        ModuleList.removeModule(0);
+        assertEquals(0, ModuleList.getModules().size());
+        ModuleList.addModule("CS2101");
+        assertEquals(1, ModuleList.getModules().size());
     }
 
     private void removeFiles() {

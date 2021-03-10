@@ -29,7 +29,7 @@ public class DeleteLessonCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList moduleList, UI ui) throws CommandException {
+    public void execute(UI ui) throws CommandException {
         Module module = ModuleList.getSelectedModule();
         ArrayList<Lesson> lessonList = module.getLessonList();
         printLessonOptions(lessonList);
@@ -39,6 +39,7 @@ public class DeleteLessonCommand extends Command {
         ArrayList<Integer> indexes = Parser.checkIndices(line, lessonList.size());
 
         deleteLessonsFromList(module, lessonList, indexes);
+        ModuleList.writeModule();
     }
 
     @Override

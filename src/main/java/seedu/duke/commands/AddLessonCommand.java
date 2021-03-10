@@ -27,12 +27,13 @@ public class AddLessonCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList moduleList, UI ui) throws CommandException {
+    public void execute(UI ui) throws CommandException {
         Module module = ModuleList.getSelectedModule();
         module.addLessonToList(getNewLessonForModule());
         LessonType newLessonType = getNewLessonForModule().getLessonType();
         String lessonName = getLessonTypeName(newLessonType);
         System.out.print(String.format(MESSAGE_ADDED_LESSON, lessonName));
+        ModuleList.writeModule();
     }
 
     //To be added in common class(DELETE AFTER DONE)

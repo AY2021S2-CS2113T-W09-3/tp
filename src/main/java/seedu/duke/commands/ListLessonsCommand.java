@@ -21,7 +21,7 @@ public class ListLessonsCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList moduleList, UI ui) throws CommandException {
+    public void execute(UI ui) throws CommandException {
         Module module = ModuleList.getSelectedModule();
         ArrayList<Lesson> lessonList = module.getLessonList();
         printLessonsFromList(lessonList);

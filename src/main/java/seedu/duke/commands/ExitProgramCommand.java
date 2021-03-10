@@ -7,7 +7,7 @@ import seedu.duke.ui.UI;
 public class ExitProgramCommand extends Command {
 
     @Override
-    public void execute(ModuleList modules, UI ui) {
+    public void execute(UI ui) {
         ui.printMessage(Messages.MESSAGE_EXIT);
     }
 
