@@ -38,7 +38,7 @@ public class DeleteLessonCommand extends Command {
         String line = input.nextLine();
         ArrayList<Integer> indexes = Parser.checkIndices(line, lessonList.size());
 
-        deleteLessonsFromList(module, lessonList, indexes);
+        deleteLessonsFromList(lessonList, indexes);
         ModuleList.writeModule();
     }
 
@@ -47,14 +47,14 @@ public class DeleteLessonCommand extends Command {
         return false;
     }
 
-    public static void deleteLessonsFromList(Module module, ArrayList<Lesson> lessonList, ArrayList<Integer> indexes) {
+    public static void deleteLessonsFromList(ArrayList<Lesson> lessonList, ArrayList<Integer> indexes) {
         int pointer = 1;
         for (int index : indexes) {
             int modifiedIndex = index - pointer;
             Lesson lesson = lessonList.get(modifiedIndex);
             String lessonName = getLessonName(lesson);
             System.out.print(String.format(MESSAGE_REMOVED_LESSON, lessonName));
-            module.deleteLessonFromList(lessonList, modifiedIndex);
+            ModuleList.getSelectedModule().deleteLessonFromList(lessonList, modifiedIndex);
             pointer++;
         }
     }

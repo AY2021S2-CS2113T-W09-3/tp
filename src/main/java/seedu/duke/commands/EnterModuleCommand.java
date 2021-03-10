@@ -23,7 +23,7 @@ public class EnterModuleCommand extends Command {
         if (ModuleList.setSelectedModule(moduleCode)) {
             ui.printMessage(MESSAGE_OVERVIEW);
         } else {
-            ui.printMessage(String.format(MESSAGE_ERROR, moduleCode));
+            throw new CommandException(String.format(MESSAGE_ERROR, moduleCode));
         }
     }
 

@@ -1,6 +1,7 @@
 package seedu.duke.module;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.TestUtil;
 import seedu.duke.storage.Writer;
 
 import java.io.File;
@@ -19,14 +20,14 @@ class ModuleListTest {
 
     @Test
     void loadModuleNames_noDirectory_sizeZero() {
-        removeFiles();
+        TestUtil.removeFiles();
         ModuleList.loadModuleNames();
         assertEquals(0, ModuleList.getModules().size());
     }
 
     @Test
     void loadModuleNames_oneInvalidFile_sizeZero() throws IOException {
-        removeFiles();
+        TestUtil.removeFiles();
         File directory = new File(FOLDER_PATH);
         directory.mkdir();
         File file1 = new File(FOLDER_PATH + "/" + "CS2113T.img");
@@ -37,7 +38,7 @@ class ModuleListTest {
 
     @Test
     void loadModuleNames_twoDifferentModules_sizeTwo() throws IOException {
-        removeFiles();
+        TestUtil.removeFiles();
         File directory = new File(FOLDER_PATH);
         directory.mkdir();
         File file1 = new File(FOLDER_PATH + "/" + "CS2113T" + TXT_FORMAT);
@@ -50,7 +51,7 @@ class ModuleListTest {
 
     @Test
     void loadModuleNames_twoSameModules_sizeTwo() throws IOException {
-        removeFiles();
+        TestUtil.removeFiles();
         File directory = new File(FOLDER_PATH);
         directory.mkdir();
         File file1 = new File(FOLDER_PATH + "/" + "CS2113T" + TXT_FORMAT);
@@ -62,7 +63,7 @@ class ModuleListTest {
 
     @Test
     void setSelectedModule_validName_loadsModule() throws IOException {
-        removeFiles();
+        TestUtil.removeFiles();
         ModuleList.loadModuleNames();
         ModuleList.reset();
         File directory = new File(FOLDER_PATH);
@@ -80,7 +81,7 @@ class ModuleListTest {
 
     @Test
     void setSelectedModule_invalidName_remainNull() throws IOException {
-        removeFiles();
+        TestUtil.removeFiles();
         ModuleList.loadModuleNames();
         ModuleList.reset();
         File directory = new File(FOLDER_PATH);
@@ -100,7 +101,7 @@ class ModuleListTest {
 
     @Test
     void setSelectedModule_invalidFile_noTaskAndLesson() throws IOException {
-        removeFiles();
+        TestUtil.removeFiles();
         ModuleList.loadModuleNames();
         ModuleList.reset();
         File directory = new File(FOLDER_PATH);
@@ -119,7 +120,7 @@ class ModuleListTest {
 
     @Test
     void setSelectedModule_invalidContent_() throws IOException {
-        removeFiles();
+        TestUtil.removeFiles();
         ModuleList.loadModuleNames();
         ModuleList.reset();
         File directory = new File(FOLDER_PATH);
@@ -138,7 +139,7 @@ class ModuleListTest {
 
     @Test
     void addModule_twoDifferentModules_sizeTwo() throws IOException {
-        removeFiles();
+        TestUtil.removeFiles();
         ModuleList.loadModuleNames();
         Writer writer = new Writer();
         ModuleList.addModule("CS2101");
@@ -156,7 +157,7 @@ class ModuleListTest {
 
     @Test
     void addModule_twoSameModules_sizeOne() throws  IOException {
-        removeFiles();
+        TestUtil.removeFiles();
         ModuleList.loadModuleNames();
         Writer writer = new Writer();
         ModuleList.addModule("CS2113T");
@@ -174,7 +175,7 @@ class ModuleListTest {
 
     @Test
     void removeModule_validIndex_removes() {
-        removeFiles();
+        TestUtil.removeFiles();
         ModuleList.loadModuleNames();
         ModuleList.addModule("CS2113T");
         ModuleList.addModule("CS2101");
@@ -184,7 +185,7 @@ class ModuleListTest {
 
     @Test
     void removeModule_negativeIndex_noChange() {
-        removeFiles();
+        TestUtil.removeFiles();
         ModuleList.loadModuleNames();
         ModuleList.addModule("CS2113T");
         ModuleList.addModule("CS2101");
@@ -194,7 +195,7 @@ class ModuleListTest {
 
     @Test
     void removeModule_indexOutOfBounds_noChange() {
-        removeFiles();
+        TestUtil.removeFiles();
         ModuleList.loadModuleNames();
         ModuleList.addModule("CS2113T");
         ModuleList.addModule("CS2101");
@@ -204,7 +205,7 @@ class ModuleListTest {
 
     @Test
     void addRemoveAddModule_SameModule_sizeOne() {
-        removeFiles();
+        TestUtil.removeFiles();
         ModuleList.loadModuleNames();
         ModuleList.addModule("CS2101");
         assertEquals(1, ModuleList.getModules().size());
@@ -214,15 +215,4 @@ class ModuleListTest {
         assertEquals(1, ModuleList.getModules().size());
     }
 
-    private void removeFiles() {
-        File directory = new File(FOLDER_PATH);
-        File[] files = directory.listFiles();
-        if (files == null) {
-            return;
-        }
-        for (File file : files) {
-            file.delete();
-        }
-        directory.delete();
-    }
 }

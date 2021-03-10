@@ -1,13 +1,13 @@
 package seedu.duke.storage;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.TestUtil;
 import seedu.duke.lesson.Lesson;
 import seedu.duke.lesson.LessonType;
 import seedu.duke.lesson.TeachingStaff;
 import seedu.duke.module.ModuleList;
 import seedu.duke.task.Task;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,13 +15,12 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.duke.storage.StorageConstants.FOLDER_PATH;
 
 class WriterTest {
 
     @Test
     void writeModule_noContentNoDirectory_instructionOnly() throws IOException {
-        removeFiles();
+        TestUtil.removeFiles();
         ModuleList.loadModuleNames();
         ModuleList.addModule("CS2113T");
         ModuleList.setSelectedModule("CS2113T");
@@ -34,7 +33,7 @@ class WriterTest {
 
     @Test
     void writeModule_twoTask_instructionAndTask() throws IOException {
-        removeFiles();
+        TestUtil.removeFiles();
         ModuleList.loadModuleNames();
         ModuleList.addModule("CS2113T");
         ModuleList.setSelectedModule("CS2113T");
@@ -53,7 +52,7 @@ class WriterTest {
 
     @Test
     void writeModule_twoLesson_instructionAndLesson() throws IOException {
-        removeFiles();
+        TestUtil.removeFiles();
         ModuleList.loadModuleNames();
         ModuleList.addModule("CS2113T");
         ModuleList.setSelectedModule("CS2113T");
@@ -72,7 +71,7 @@ class WriterTest {
 
     @Test
     void writeModule_twoLessonTwoTask_allContent() throws IOException {
-        removeFiles();
+        TestUtil.removeFiles();
         ModuleList.loadModuleNames();
         ModuleList.addModule("CS2113T");
         ModuleList.setSelectedModule("CS2113T");
@@ -95,15 +94,4 @@ class WriterTest {
         assertEquals(Files.readAllLines(reference), Files.readAllLines(actual));
     }
 
-    private void removeFiles() {
-        File directory = new File(FOLDER_PATH);
-        File[] files = directory.listFiles();
-        if (files == null) {
-            return;
-        }
-        for (File file : files) {
-            file.delete();
-        }
-        directory.delete();
-    }
 }

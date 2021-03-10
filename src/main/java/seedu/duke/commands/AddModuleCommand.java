@@ -22,7 +22,7 @@ public class AddModuleCommand extends Command {
         if (ModuleList.addModule(moduleCode)) {
             ui.printMessage(String.format(MESSAGE_SUCCESS, moduleCode));
         } else {
-            ui.printMessage(String.format(MESSAGE_DUPLICATE, moduleCode));
+            throw new CommandException(String.format(MESSAGE_DUPLICATE, moduleCode));
         }
     }
 
