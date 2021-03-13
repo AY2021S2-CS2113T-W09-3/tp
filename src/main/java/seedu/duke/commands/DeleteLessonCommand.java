@@ -22,11 +22,6 @@ public class DeleteLessonCommand extends Command {
 
     }
 
-    /**
-     * Deletes all lessons corresponding to specified indices.
-     *
-     * @param ui Instance of UI.
-     */
     @Override
     public void execute(UI ui) {
         ui.printMessage(MESSAGE_LESSONS_TO_DELETE);

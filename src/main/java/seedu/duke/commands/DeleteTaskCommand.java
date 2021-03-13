@@ -15,12 +15,6 @@ import static seedu.duke.common.Messages.MESSAGE_TASK_SELECT_INFO;
 
 public class DeleteTaskCommand extends Command {
 
-    /**
-     * Requests for list of indices to delete.
-     * Deletes all tasks corresponding to specified indices.
-     *
-     * @param ui Instance of UI.
-     */
     @Override
     public void execute(UI ui) {
         Module module = ModuleList.getSelectedModule();
@@ -40,12 +34,6 @@ public class DeleteTaskCommand extends Command {
         return false;
     }
 
-    /**
-     * Prints prompt to delete tasks.
-     *
-     * @param ui Instance of UI.
-     * @param taskList Array list of tasks.
-     */
     private void printPrompt(UI ui, ArrayList<Task> taskList) {
         ui.printMessage(MESSAGE_TASKS_TO_DELETE);
         ui.printSummarisedTasks(taskList);

@@ -8,11 +8,6 @@ import static seedu.duke.common.Messages.MESSAGE_CLOSED_MODULE;
 
 public class ExitModuleCommand extends Command {
 
-    /**
-     * Exits from selected module.
-     *
-     * @param ui Instance of UI.
-     */
     @Override
     public void execute(UI ui) {
         String moduleCode = ModuleList.getSelectedModule().getModuleCode();

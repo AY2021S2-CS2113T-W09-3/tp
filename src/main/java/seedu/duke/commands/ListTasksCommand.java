@@ -6,11 +6,7 @@ import seedu.duke.ui.UI;
 
 public class ListTasksCommand extends Command {
 
-    /**
-     * Prints tasks in selected module.
-     *
-     * @param ui Instance of UI.
-     */
+
     @Override
     public void execute(UI ui) {
         ui.printAllTasks();

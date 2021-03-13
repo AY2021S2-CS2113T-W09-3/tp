@@ -10,12 +10,6 @@ import static seedu.duke.common.Messages.NEWLINE;
 
 public class ListModulesCommand extends Command {
 
-
-    /**
-     * Prints list of modules.
-     *
-     * @param ui Instance of UI.
-     */
     @Override
     public void execute(UI ui) {
         StringBuilder stringBuilder = new StringBuilder(MESSAGE_MODULE_TO_LIST);

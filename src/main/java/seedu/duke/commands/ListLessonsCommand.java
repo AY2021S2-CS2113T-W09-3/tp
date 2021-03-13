@@ -20,11 +20,6 @@ public class ListLessonsCommand extends Command {
 
     }
 
-    /**
-     * Prints list of lessons in selected module.
-     *
-     * @param ui Instance of UI.
-     */
     @Override
     public void execute(UI ui) {
         Module module = ModuleList.getSelectedModule();

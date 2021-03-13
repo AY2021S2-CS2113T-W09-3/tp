@@ -25,11 +25,6 @@ import static seedu.duke.common.Messages.MESSAGE_UNABLE_TO_OPEN_LINK;
  */
 public class OpenLessonLinkCommand extends Command {
 
-    /**
-     * Opens links corresponding to specified indices.
-     *
-     * @param ui Instance of UI.
-     */
     @Override
     public void execute(UI ui) {
         ui.printMessage(MESSAGE_LESSON_TO_OPEN_LINK);

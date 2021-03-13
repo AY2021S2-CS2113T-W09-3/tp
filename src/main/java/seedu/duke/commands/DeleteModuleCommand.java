@@ -14,12 +14,6 @@ import static seedu.duke.common.Messages.NEWLINE;
 
 public class DeleteModuleCommand extends Command {
 
-    /**
-     * Requests for list of indices to delete.
-     * Deletes all modules corresponding to specified indices.
-     *
-     * @param ui Instance of UI.
-     */
     @Override
     public void execute(UI ui) {
         ui.printMessage(getDeleteInfo());
@@ -35,11 +29,6 @@ public class DeleteModuleCommand extends Command {
         return false;
     }
 
-    /**
-     * Returns string containing instructions and module list.
-     *
-     * @return Message to print.
-     */
     private String getDeleteInfo() {
         StringBuilder stringBuilder = new StringBuilder(MESSAGE_MODULE_TO_DELETE);
         ArrayList<String> modules = ModuleList.getModules();
@@ -52,12 +41,6 @@ public class DeleteModuleCommand extends Command {
         return stringBuilder.toString();
     }
 
-    /**
-     * Returns string containing list of deleted modules.
-     *
-     * @param deletedModuleCodes Arraylist of module codes.
-     * @return Message to print.
-     */
     private String getDeletedModuleCodes(ArrayList<String> deletedModuleCodes) {
         StringBuilder stringBuilder = new StringBuilder();
         for (String moduleCode : deletedModuleCodes) {

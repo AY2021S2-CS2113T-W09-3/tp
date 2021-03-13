@@ -15,12 +15,6 @@ import static seedu.duke.common.Messages.MESSAGE_TASK_SELECT_INFO;
 
 public class MarkAsDoneCommand extends Command {
 
-    /**
-     * Requests for list of indices to mark as done.
-     * Marks all tasks corresponding to specified indices as done.
-     *
-     * @param ui Instance of UI.
-     */
     @Override
     public void execute(UI ui) {
         Module module = ModuleList.getSelectedModule();
@@ -40,12 +34,6 @@ public class MarkAsDoneCommand extends Command {
         return false;
     }
 
-    /**
-     * Prints prompt to mark tasks as done.
-     *
-     * @param ui Instance of UI.
-     * @param undoneTasks Array list of undone tasks.
-     */
     private void printPrompt(UI ui, ArrayList<Task> undoneTasks) {
         ui.printMessage(MESSAGE_TASKS_TO_MARK);
         ui.printSummarisedTasks(undoneTasks);

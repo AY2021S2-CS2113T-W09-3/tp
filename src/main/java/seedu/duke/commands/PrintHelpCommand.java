@@ -14,11 +14,6 @@ public class PrintHelpCommand extends Command {
 
     }
 
-    /**
-     * Prints list of commands.
-     *
-     * @param ui Instance of UI.
-     */
     @Override
     public void execute(UI ui) {
         if (ModuleList.getSelectedModule() == null) {
@@ -33,11 +28,6 @@ public class PrintHelpCommand extends Command {
         return false;
     }
 
-    /**
-     * Returns string containing dashboard commands and their descriptions.
-     *
-     * @return Message to print.
-     */
     private static String getDashboardCommands() {
         StringBuilder stringBuilder = new StringBuilder();
         for (DashboardCommands command : DashboardCommands.values()) {
@@ -48,11 +38,6 @@ public class PrintHelpCommand extends Command {
         return stringBuilder.toString();
     }
 
-    /**
-     * Returns string containing module commands and their descriptions.
-     *
-     * @return Message to print.
-     */
     private static String getModuleCommands() {
         StringBuilder sb = new StringBuilder();
         for (ModuleCommands command : ModuleCommands.values()) {

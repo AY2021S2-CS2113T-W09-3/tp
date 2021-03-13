@@ -21,11 +21,6 @@ public class AddLessonCommand extends Command {
         this.lesson = lesson;
     }
 
-    /**
-     * Adds new lesson to selected module.
-     *
-     * @param ui Instance of UI.
-     */
     @Override
     public void execute(UI ui) {
         Module module = ModuleList.getSelectedModule();

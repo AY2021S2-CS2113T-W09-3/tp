@@ -19,11 +19,6 @@ public class AddTaskCommand extends Command {
         this.task = task;
     }
 
-    /**
-     * Adds new task to selected module.
-     *
-     * @param ui Instance of UI.
-     */
     @Override
     public void execute(UI ui) {
         Module module = ModuleList.getSelectedModule();
@@ -39,12 +34,6 @@ public class AddTaskCommand extends Command {
         return false;
     }
 
-    /**
-     * Reads user input for whether the task is graded.
-     *
-     * @param ui Instance of UI.
-     * @return Boolean of is new task graded.
-     */
     public boolean getIsTaskGraded(UI ui) {
         ui.printMessage(MESSAGE_TASK_CHECK_GRADED);
         String userInput = ui.readCommand();

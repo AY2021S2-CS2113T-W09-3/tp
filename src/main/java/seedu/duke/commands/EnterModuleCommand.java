@@ -15,12 +15,6 @@ public class EnterModuleCommand extends Command {
         this.moduleCode = moduleCode;
     }
 
-    /**
-     * Opens specified module.
-     *
-     * @param ui Instance of UI.
-     * @throws CommandException Invalid module code.
-     */
     @Override
     public void execute(UI ui) throws CommandException {
         if (ModuleList.setSelectedModule(moduleCode)) {
