@@ -1,5 +1,8 @@
 package seedu.duke.common;
 
+/**
+ * Enum class for all commands available inside a module.
+ */
 public enum ModuleCommands {
 
     HELP("help", "List out commands available for the selected module."),
@@ -14,8 +17,7 @@ public enum ModuleCommands {
     DELETE_TASK("delete task", "Deletes specified tasks."),
     MARK("mark", "Marks specified tasks as done."),
     UNMARK("unmark", "Marks specified tasks as undone."),
-    TASKS("tasks", "Lists all tasks."),
-    INVALID("unknown", "Unrecognized command.");
+    TASKS("tasks", "Lists all tasks.");
 
     private final String word;
     private final String description;
@@ -31,5 +33,19 @@ public enum ModuleCommands {
 
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Takes in user input and returns appropriate ModuleCommands object.
+     * @param input user input string
+     * @return ModuleCommands object based on user input, null if there is no match
+     */
+    public static ModuleCommands fromInput(String input) {
+        for (ModuleCommands command : ModuleCommands.values()) {
+            if (input.equalsIgnoreCase(command.getWord())) {
+                return command;
+            }
+        }
+        return null;
     }
 }

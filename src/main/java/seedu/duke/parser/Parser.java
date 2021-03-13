@@ -97,7 +97,7 @@ public class Parser {
      * @throws UnknownCommandException if valid command cannot be parsed from user input
      */
     private Command parseAtDashboard(String input) throws UnknownCommandException {
-        DashboardCommands command = parseDashboardCommandFromInput(input);
+        DashboardCommands command = DashboardCommands.fromInput(input);
         switch (command) {
         case ADD:
             String moduleCode = getModuleCode(input);
@@ -114,30 +114,6 @@ public class Parser {
             return new ExitProgramCommand();
         default:
             throw new UnknownCommandException();
-        }
-    }
-
-    /**
-     * Parses user input to determine the dashboard command specified.
-     *
-     * @param input full user input string
-     * @return an integer representing the command specified
-     */
-    private DashboardCommands parseDashboardCommandFromInput(String input) {
-        if (input.equalsIgnoreCase(DashboardCommands.HELP.getWord())) {
-            return DashboardCommands.HELP;
-        } else if (input.equalsIgnoreCase(EXIT.getWord())) {
-            return EXIT;
-        } else if (input.equalsIgnoreCase(MODULES.getWord())) {
-            return MODULES;
-        } else if (startsWith(input, ADD.getWord())) {
-            return ADD;
-        } else if (startsWith(input, DELETE.getWord())) {
-            return DELETE;
-        } else if (isValidModuleCode(input)) {
-            return OPEN;
-        } else {
-            return DashboardCommands.INVALID;
         }
     }
 
@@ -196,7 +172,7 @@ public class Parser {
      * @throws UnknownCommandException if valid command cannot be parsed from user input
      */
     private Command parseInModule(String input) throws UnknownCommandException {
-        ModuleCommands command = parseInModuleCommandsFromInput(input);
+        ModuleCommands command = ModuleCommands.fromInput(input);
 
         switch (command) {
         case HELP:
@@ -229,44 +205,6 @@ public class Parser {
             return new DeleteTaskCommand();
         default:
             throw new UnknownCommandException();
-        }
-    }
-
-    /**
-     * Parses user input to determine in-module command specified.
-     *
-     * @param input full user input string
-     * @return an integer representing the command specified
-     */
-    private ModuleCommands parseInModuleCommandsFromInput(String input) {
-        if (input.equalsIgnoreCase(ModuleCommands.HELP.getWord())) {
-            return ModuleCommands.HELP;
-        } else if (input.equalsIgnoreCase(CLOSE.getWord())) {
-            return CLOSE;
-        } else if (input.equalsIgnoreCase(INFO.getWord())) {
-            return INFO;
-        } else if (input.equalsIgnoreCase(LESSONS.getWord())) {
-            return LESSONS;
-        } else if (input.equalsIgnoreCase(LINK.getWord())) {
-            return LINK;
-        } else if (input.equalsIgnoreCase(TASKS.getWord())) {
-            return TASKS;
-        } else if (input.equalsIgnoreCase(MARK.getWord())) {
-            return MARK;
-        } else if (input.equalsIgnoreCase(UNMARK.getWord())) {
-            return UNMARK;
-        } else if (input.equalsIgnoreCase(TEACHER.getWord())) {
-            return TEACHER;
-        } else if (startsWith(input, ADD_LESSON.getWord())) {
-            return ADD_LESSON;
-        } else if (startsWith(input, DELETE_LESSON.getWord())) {
-            return DELETE_LESSON;
-        } else if (startsWith(input, ADD_TASK.getWord())) {
-            return ADD_TASK;
-        } else if (startsWith(input, DELETE_TASK.getWord())) {
-            return DELETE_TASK;
-        } else {
-            return ModuleCommands.INVALID;
         }
     }
 
