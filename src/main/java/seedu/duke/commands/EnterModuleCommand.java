@@ -24,7 +24,8 @@ public class EnterModuleCommand extends Command {
      */
     @Override
     public void execute(UI ui) throws CommandException {
-        if (ModuleList.setSelectedModule(moduleCode)) {
+        ModuleList moduleList = ModuleList.getInstance();
+        if (moduleList.setSelectedModule(moduleCode)) {
             ui.printMessage(String.format(MESSAGE_MODULE_OPENED, moduleCode));
             Command command = new ModuleInfoCommand();
             command.execute(ui);

@@ -60,8 +60,9 @@ public class OpenLessonLinkCommand extends Command {
      */
     @Override
     public void execute(UI ui) {
+        ModuleList moduleList = ModuleList.getInstance();
         ui.printMessage(MESSAGE_LESSON_TO_OPEN_LINK);
-        Module module = ModuleList.getSelectedModule();
+        Module module = moduleList.getSelectedModule();
         ArrayList<Lesson> lessonList = module.getLessonList();
         printLessons(lessonList, ui);
 

@@ -24,7 +24,8 @@ public class AddModuleCommand extends Command {
      */
     @Override
     public void execute(UI ui) throws CommandException {
-        if (ModuleList.addModule(moduleCode)) {
+        ModuleList moduleList = ModuleList.getInstance();
+        if (moduleList.addModule(moduleCode)) {
             ui.printMessage(String.format(MESSAGE_ADDED_MODULE, moduleCode));
         } else {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_MODULE, moduleCode));

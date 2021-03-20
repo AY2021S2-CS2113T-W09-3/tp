@@ -18,11 +18,12 @@ class ViewTeachingStaffCommandTest extends LessonCommandTest {
     @Test
     void execute_ui_expectPrintsCorrectOutput() {
         TestUtilAndConstants.removeFiles();
-        ModuleList.loadModuleNames();
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.loadModuleNames();
         UI ui = new UI();
 
-        ModuleList.addModule(MODULE_CODE);
-        ModuleList.setSelectedModule(MODULE_CODE);
+        moduleList.addModule(MODULE_CODE);
+        moduleList.setSelectedModule(MODULE_CODE);
         addLessonsToList(ui);
         Command command = new ViewTeachingStaffCommand();
 

@@ -27,11 +27,12 @@ class EnterModuleCommandTest {
         System.setOut(new PrintStream(outContent));
 
         TestUtilAndConstants.removeFiles();
-        ModuleList.loadModuleNames();
-        ModuleList.addModule(MODULE_CODE_1);
-        ModuleList.addModule(MODULE_CODE_4);
-        ModuleList.addModule(MODULE_CODE_2);
-        ModuleList.addModule(MODULE_CODE_3);
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.loadModuleNames();
+        moduleList.addModule(MODULE_CODE_1);
+        moduleList.addModule(MODULE_CODE_4);
+        moduleList.addModule(MODULE_CODE_2);
+        moduleList.addModule(MODULE_CODE_3);
 
         Command command = new EnterModuleCommand(MODULE_CODE_2);
         command.execute(new UI());
@@ -46,11 +47,12 @@ class EnterModuleCommandTest {
         System.setOut(new PrintStream(outContent));
 
         TestUtilAndConstants.removeFiles();
-        ModuleList.loadModuleNames();
-        ModuleList.addModule(MODULE_CODE_1);
-        ModuleList.addModule(MODULE_CODE_4);
-        ModuleList.addModule(MODULE_CODE_2);
-        ModuleList.addModule(MODULE_CODE_3);
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.loadModuleNames();
+        moduleList.addModule(MODULE_CODE_1);
+        moduleList.addModule(MODULE_CODE_4);
+        moduleList.addModule(MODULE_CODE_2);
+        moduleList.addModule(MODULE_CODE_3);
 
         Command command = new EnterModuleCommand("CS3235");
 

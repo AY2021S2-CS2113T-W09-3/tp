@@ -18,12 +18,13 @@ class DeleteLessonCommandTest extends LessonCommandTest {
     void deleteLessonsFromList_moduleLessonListIndexes_expectPrintsCorrectOutput() {
 
         TestUtilAndConstants.removeFiles();
-        ModuleList.loadModuleNames();
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.loadModuleNames();
 
         UI ui = new UI();
 
-        ModuleList.addModule(MODULE_CODE);
-        ModuleList.setSelectedModule(MODULE_CODE);
+        moduleList.addModule(MODULE_CODE);
+        moduleList.setSelectedModule(MODULE_CODE);
 
         OutputStream os = getOutputStream();
         addLessonsToList(ui);
@@ -32,7 +33,7 @@ class DeleteLessonCommandTest extends LessonCommandTest {
         removeOutputStream();
 
         OutputStream newOs = getOutputStream();
-        DeleteLessonCommand.deleteLessonsFromList(ModuleList.getSelectedModule().getLessonList(), indexes, ui);
+        DeleteLessonCommand.deleteLessonsFromList(moduleList.getSelectedModule().getLessonList(), indexes, ui);
         assertEquals(EXPECTED_DELETE_LESSON, newOs.toString());
         removeOutputStream();
     }

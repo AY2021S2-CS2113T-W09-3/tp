@@ -29,13 +29,14 @@ public class AddLessonCommand extends Command {
      */
     @Override
     public void execute(UI ui) {
-        Module module = ModuleList.getSelectedModule();
+        ModuleList moduleList = ModuleList.getInstance();
+        Module module = moduleList.getSelectedModule();
         module.addLesson(lesson);
         LessonType lessonType = lesson.getLessonType();
         String lessonTypeString = getLessonTypeString(lessonType);
         ui.printMessage(String.format(MESSAGE_ADDED_LESSON, lessonTypeString));
-        ModuleList.writeModule();
-        ModuleList.sortLessons();
+        moduleList.writeModule();
+        moduleList.sortLessons();
     }
 
     @Override

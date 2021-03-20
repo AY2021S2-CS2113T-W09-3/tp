@@ -30,11 +30,12 @@ class DeleteTaskCommandTest {
         Task task2 = new Task("iP increments", deadline, "remember to attach JAR file");
         Task task3 = new Task("lecture quiz", deadline, "complete before next lecture");
         Task task4 = new Task("read up notes", deadline, "complete before lecture");
-        ModuleList.getSelectedModule().addTask(task1);
-        ModuleList.getSelectedModule().addTask(task2);
-        ModuleList.getSelectedModule().addTask(task3);
-        ModuleList.getSelectedModule().addTask(task4);
-        return ModuleList.getSelectedModule().getTaskList();
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.getSelectedModule().addTask(task1);
+        moduleList.getSelectedModule().addTask(task2);
+        moduleList.getSelectedModule().addTask(task3);
+        moduleList.getSelectedModule().addTask(task4);
+        return moduleList.getSelectedModule().getTaskList();
     }
 
     @Test
@@ -45,9 +46,10 @@ class DeleteTaskCommandTest {
         System.setOut(new PrintStream(bos));
 
         TestUtilAndConstants.removeFiles();
-        ModuleList.loadModuleNames();
-        ModuleList.addModule(MODULE_CODE_1);
-        ModuleList.setSelectedModule(MODULE_CODE_1);
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.loadModuleNames();
+        moduleList.addModule(MODULE_CODE_1);
+        moduleList.setSelectedModule(MODULE_CODE_1);
 
         ArrayList<Task> taskList = initialiseTaskList();
 

@@ -27,13 +27,14 @@ public class AddTaskCommand extends Command {
      */
     @Override
     public void execute(UI ui) {
-        Module module = ModuleList.getSelectedModule();
+        ModuleList moduleList = ModuleList.getInstance();
+        Module module = moduleList.getSelectedModule();
         boolean isGraded = getIsTaskGraded(ui);
         task.setGraded(isGraded);
         module.addTask(task);
         ui.printMessage(String.format(MESSAGE_ADDED_TASK, task.getDescription()));
-        ModuleList.writeModule();
-        ModuleList.sortTasks();
+        moduleList.writeModule();
+        moduleList.sortTasks();
     }
 
     @Override

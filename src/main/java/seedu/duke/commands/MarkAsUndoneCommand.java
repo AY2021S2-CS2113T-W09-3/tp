@@ -24,7 +24,8 @@ public class MarkAsUndoneCommand extends Command {
      */
     @Override
     public void execute(UI ui) {
-        Module module = ModuleList.getSelectedModule();
+        ModuleList moduleList = ModuleList.getInstance();
+        Module module = moduleList.getSelectedModule();
         ArrayList<Task> doneTasks = module.getDoneOrUndoneTasks(true);
         printPrompt(ui, doneTasks);
         ArrayList<Task> selectedTasks = getSpecifiedTasks(ui, doneTasks);
@@ -33,7 +34,7 @@ public class MarkAsUndoneCommand extends Command {
             ui.printMessage(String.format(MESSAGE_MARKED_AS_UNDONE,description));
             module.unmarkTask(task);
         }
-        ModuleList.writeModule();
+        moduleList.writeModule();
     }
 
     @Override

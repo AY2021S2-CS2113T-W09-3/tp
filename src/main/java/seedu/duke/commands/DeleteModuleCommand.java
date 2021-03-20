@@ -24,18 +24,19 @@ public class DeleteModuleCommand extends Command {
      */
     @Override
     public void execute(UI ui) {
-        if (ModuleList.getModules().size() == 0) {
+        ModuleList moduleList = ModuleList.getInstance();
+        if (moduleList.getModules().size() == 0) {
             ui.printMessage(MESSAGE_NO_MODULES_TO_DELETE);
             return;
         }
         ui.printMessage(getDeleteInfo());
 
-        ArrayList<Integer> indices = ui.getIndicesFromUser(ModuleList.getModules().size());
+        ArrayList<Integer> indices = ui.getIndicesFromUser(moduleList.getModules().size());
         if (indices.size() == 0) {
             return;
         }
 
-        ArrayList<String> deletedModulesCodes = ModuleList.deleteModules(indices);
+        ArrayList<String> deletedModulesCodes = moduleList.deleteModules(indices);
         String deletedMessage = getDeletedModuleCodes(deletedModulesCodes);
         ui.printMessage(deletedMessage);
     }
@@ -51,8 +52,9 @@ public class DeleteModuleCommand extends Command {
      * @return Message to print.
      */
     private String getDeleteInfo() {
+        ModuleList moduleList = ModuleList.getInstance();
         StringBuilder stringBuilder = new StringBuilder(MESSAGE_MODULE_TO_DELETE);
-        ArrayList<String> modules = ModuleList.getModules();
+        ArrayList<String> modules = moduleList.getModules();
         for (String moduleCode : modules) {
             int counter = modules.indexOf(moduleCode) + 1;
             stringBuilder.append(String.format(Messages.FORMAT_LIST_ITEMS, counter, moduleCode));

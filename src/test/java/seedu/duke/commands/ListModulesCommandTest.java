@@ -27,10 +27,11 @@ class ListModulesCommandTest {
         System.setOut(new PrintStream(outContent));
 
         TestUtilAndConstants.removeFiles();
-        ModuleList.loadModuleNames();
-        ModuleList.addModule(MODULE_CODE_1);
-        ModuleList.addModule(MODULE_CODE_3);
-        ModuleList.addModule(MODULE_CODE_2);
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.loadModuleNames();
+        moduleList.addModule(MODULE_CODE_1);
+        moduleList.addModule(MODULE_CODE_3);
+        moduleList.addModule(MODULE_CODE_2);
 
         Command command = new ListModulesCommand();
         command.execute(new UI());

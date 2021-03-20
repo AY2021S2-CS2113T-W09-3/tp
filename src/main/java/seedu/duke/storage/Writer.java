@@ -80,7 +80,8 @@ public class Writer {
      */
     public void writeModule() {
         try {
-            Module module = ModuleList.getSelectedModule();
+            ModuleList moduleList = ModuleList.getInstance();
+            Module module = moduleList.getSelectedModule();
             File path = getFile(module);
             FileWriter fileWriter = new FileWriter(path);
             writeInstructions(fileWriter, module.getModuleCode());

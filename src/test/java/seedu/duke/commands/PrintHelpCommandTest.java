@@ -28,12 +28,13 @@ class PrintHelpCommandTest {
         System.setOut(new PrintStream(outContent));
 
         TestUtilAndConstants.removeFiles();
-        ModuleList.loadModuleNames();
-        ModuleList.addModule(MODULE_CODE_3);
-        ModuleList.addModule(MODULE_CODE_2);
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.loadModuleNames();
+        moduleList.addModule(MODULE_CODE_3);
+        moduleList.addModule(MODULE_CODE_2);
 
         // no module selected
-        ModuleList.reset();
+        moduleList.reset();
 
         // execute command
         PrintHelpCommand printHelpCommand = new PrintHelpCommand();
@@ -41,7 +42,7 @@ class PrintHelpCommandTest {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        if (ModuleList.getSelectedModule() == null) {
+        if (moduleList.getSelectedModule() == null) {
             stringBuilder.append(MESSAGE_DASHBOARD_HELP).append(NEWLINE);
         } else {
             stringBuilder.append(MESSAGE_MODULE_HELP).append(NEWLINE);
@@ -64,7 +65,7 @@ class PrintHelpCommandTest {
         assertEquals(output, outContent.toString() + NEWLINE);
 
         // module selected
-        ModuleList.setSelectedModule(MODULE_CODE_3);
+        moduleList.setSelectedModule(MODULE_CODE_3);
         printHelpCommand = new PrintHelpCommand();
         printHelpCommand.execute(new UI());
 

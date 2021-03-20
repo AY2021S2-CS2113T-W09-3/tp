@@ -33,11 +33,12 @@ class MarkAsUndoneCommandTest {
         System.setOut(new PrintStream(bos));
 
         TestUtilAndConstants.removeFiles();
-        ModuleList.loadModuleNames();
-        ModuleList.addModule(MODULE_CODE_1);
-        ModuleList.setSelectedModule(MODULE_CODE_1);
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.loadModuleNames();
+        moduleList.addModule(MODULE_CODE_1);
+        moduleList.setSelectedModule(MODULE_CODE_1);
 
-        ArrayList<Task> taskList = initialiseTaskList(ModuleList.getSelectedModule());
+        ArrayList<Task> taskList = initialiseTaskList(moduleList.getSelectedModule());
 
         MarkAsUndoneCommand markAsUndoneCommand = new MarkAsUndoneCommand();
         markAsUndoneCommand.execute(new UI());

@@ -24,7 +24,8 @@ public class DeleteTaskCommand extends Command {
      */
     @Override
     public void execute(UI ui) {
-        Module module = ModuleList.getSelectedModule();
+        ModuleList moduleList = ModuleList.getInstance();
+        Module module = moduleList.getSelectedModule();
         ArrayList<Task> taskList = module.getTaskList();
         printPrompt(ui, taskList);
         ArrayList<Task> tasks = getSpecifiedTasks(ui, taskList);
@@ -33,8 +34,8 @@ public class DeleteTaskCommand extends Command {
             ui.printMessage(String.format(MESSAGE_REMOVED_TASK, description));
             module.removeTask(task);
         }
-        ModuleList.writeModule();
-        ModuleList.sortTasks();
+        moduleList.writeModule();
+        moduleList.sortTasks();
     }
 
     @Override

@@ -20,8 +20,9 @@ public class Duke {
     }
 
     private static void start() {
+        ModuleList moduleList = ModuleList.getInstance();
         ui.printMessage(DIVIDER + NEWLINE + MESSAGE_WELCOME);
-        ModuleList.loadModuleNames();
+        moduleList.loadModuleNames();
     }
 
     private static void run() {

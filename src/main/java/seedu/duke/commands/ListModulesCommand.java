@@ -18,14 +18,15 @@ public class ListModulesCommand extends Command {
      */
     @Override
     public void execute(UI ui) {
+        ModuleList moduleList = ModuleList.getInstance();
         ui.printMessage(MESSAGE_MODULE_TO_LIST);
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < ModuleList.getModules().size(); i++) {
+        for (int i = 0; i < moduleList.getModules().size(); i++) {
             if (i != INDEX_FIRST) {
                 stringBuilder.append(NEWLINE);
             }
-            String moduleCode = ModuleList.getModules().get(i);
-            int counter = ModuleList.getModules().indexOf(moduleCode) + 1;
+            String moduleCode = moduleList.getModules().get(i);
+            int counter = moduleList.getModules().indexOf(moduleCode) + 1;
             stringBuilder.append(String.format(Messages.FORMAT_LIST_ITEMS, counter, moduleCode));
         }
         String listMessage = stringBuilder.toString();

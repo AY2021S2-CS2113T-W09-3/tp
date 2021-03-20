@@ -28,11 +28,12 @@ public class DeleteLessonCommand extends Command {
      */
     @Override
     public void execute(UI ui) {
-        Module module = ModuleList.getSelectedModule();
+        ModuleList moduleList = ModuleList.getInstance();
+        Module module = moduleList.getSelectedModule();
         ArrayList<Lesson> lessonList = module.getLessonList();
         printLessons(lessonList, ui);
         verifyLessonsToDelete(ui, lessonList);
-        ModuleList.sortLessons();
+        moduleList.sortLessons();
     }
 
     /**
@@ -42,6 +43,7 @@ public class DeleteLessonCommand extends Command {
      * @param lessonList ArrayList of lessons in specified module.
      */
     private void verifyLessonsToDelete(UI ui, ArrayList<Lesson> lessonList) {
+        ModuleList moduleList = ModuleList.getInstance();
         if (lessonList.size() == 0) {
             ui.printMessage(MESSAGE_LESSONS_LIST_EMPTY);
         } else {
@@ -50,7 +52,7 @@ public class DeleteLessonCommand extends Command {
             ArrayList<Integer> indices = Parser.checkIndices(line, lessonList.size());
 
             deleteLessonsFromList(lessonList, indices, ui);
-            ModuleList.writeModule();
+            moduleList.writeModule();
         }
     }
 
@@ -82,13 +84,14 @@ public class DeleteLessonCommand extends Command {
      * @param ui         Instance of UI.
      */
     public static void deleteLessonsFromList(ArrayList<Lesson> lessonList, ArrayList<Integer> indices, UI ui) {
+        ModuleList moduleList = ModuleList.getInstance();
         int pointer = 1;
         for (int index : indices) {
             int modifiedIndex = index - pointer;
             Lesson lesson = lessonList.get(modifiedIndex);
             String lessonType = getLessonTypeString(lesson.getLessonType());
             ui.printMessage(String.format(MESSAGE_REMOVED_LESSON, lessonType));
-            ModuleList.getSelectedModule().removeLesson(modifiedIndex);
+            moduleList.getSelectedModule().removeLesson(modifiedIndex);
             pointer++;
         }
     }

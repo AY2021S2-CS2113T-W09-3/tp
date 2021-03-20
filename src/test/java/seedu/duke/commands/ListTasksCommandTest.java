@@ -45,11 +45,12 @@ class ListTasksCommandTest {
         System.setOut(new PrintStream(bos));
 
         TestUtilAndConstants.removeFiles();
-        ModuleList.loadModuleNames();
-        ModuleList.addModule(MODULE_CODE_1);
-        ModuleList.setSelectedModule(MODULE_CODE_1);
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.loadModuleNames();
+        moduleList.addModule(MODULE_CODE_1);
+        moduleList.setSelectedModule(MODULE_CODE_1);
 
-        initialiseTaskList(ModuleList.getSelectedModule());
+        initialiseTaskList(moduleList.getSelectedModule());
 
         UI ui = new UI();
         LocalDate date = LocalDate.parse("26-02-2021", FORMATTER);

@@ -184,7 +184,7 @@ public class Parser {
      * @return true if user has already entered a module, false otherwise
      */
     private boolean moduleIsSelected() {
-        return ModuleList.getSelectedModule() != null;
+        return ModuleList.getInstance().getSelectedModule() != null;
     }
 
     /**

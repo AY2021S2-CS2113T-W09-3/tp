@@ -1,34 +1,44 @@
 package seedu.duke.module;
 
 
-import seedu.duke.lesson.Lesson;
 import seedu.duke.storage.Loader;
 import seedu.duke.storage.Writer;
-import seedu.duke.task.Task;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 import static seedu.duke.common.CommonMethods.getDaysRemaining;
 
 public class ModuleList {
 
+    private static ModuleList moduleListInstance = null;
+    
+    private ModuleList() {
+        
+    }
+    
+    public static ModuleList getInstance() {
+        if (moduleListInstance == null) {
+            moduleListInstance = new ModuleList();
+        }
+        return moduleListInstance;
+    }
+    
     private static final ArrayList<String> modules = new ArrayList<>();
     private static Module selectedModule;
 
-    public static Module getSelectedModule() {
+    public Module getSelectedModule() {
         return selectedModule;
     }
 
     /**
      * For testing purposes only.
      */
-    public static void hardSetSelectedModule(String moduleCode) {
+    public void hardSetSelectedModule(String moduleCode) {
         ModuleList.selectedModule = new Module(moduleCode);
     }
 
-    public static ArrayList<String> getModules() {
+    public ArrayList<String> getModules() {
         return modules;
     }
 
@@ -37,7 +47,7 @@ public class ModuleList {
      * Searches directory for module files.
      * Adds their name (excluding ".txt") to the module list.
      */
-    public static void loadModuleNames() {
+    public void loadModuleNames() {
         modules.clear();
         Loader loader = new Loader();
         for (String name : loader.getModules()) {
@@ -50,7 +60,7 @@ public class ModuleList {
      *
      * @param moduleCode Module name, excluding ".txt".
      */
-    public static boolean addModule(String moduleCode) {
+    public boolean addModule(String moduleCode) {
         if (insertModule(moduleCode)) {
             Writer writer = new Writer();
             writer.createFile(moduleCode);
@@ -64,7 +74,7 @@ public class ModuleList {
      *
      * @param moduleCode Module code, excluding ".txt".
      */
-    private static boolean insertModule(String moduleCode) {
+    private boolean insertModule(String moduleCode) {
         if (modules.contains(moduleCode)) {
             //Error, module already exists
             return false;
@@ -80,7 +90,7 @@ public class ModuleList {
      * @param moduleNumbers Index of modules to delete.
      * @return List of names of modules that are deleted.
      */
-    public static ArrayList<String> deleteModules(ArrayList<Integer> moduleNumbers) {
+    public ArrayList<String> deleteModules(ArrayList<Integer> moduleNumbers) {
         ArrayList<String> deletedModules = new ArrayList<>();
         Collections.reverse(moduleNumbers);
         for (Integer moduleNumber : moduleNumbers) {
@@ -99,7 +109,7 @@ public class ModuleList {
      *
      * @param index Index of module to remove.
      */
-    public static String removeModule(int index) {
+    public String removeModule(int index) {
         if (index < 0 || index >= modules.size()) {
             return null;
         }
@@ -120,7 +130,7 @@ public class ModuleList {
      * @param moduleCode Module name, excluding ".txt".
      * @return True if successful, false if unable to find file.
      */
-    public static boolean setSelectedModule(String moduleCode) {
+    public boolean setSelectedModule(String moduleCode) {
         Loader loader = new Loader();
         if (!modules.contains(moduleCode)) {
             //Unable to find file
@@ -141,14 +151,14 @@ public class ModuleList {
     /**
      * Resets selected module by setting it to null.
      */
-    public static void reset() {
+    public void reset() {
         selectedModule = null;
     }
 
     /**
      * Writes updated data to file of selected module.
      */
-    public static void writeModule() {
+    public void writeModule() {
         Writer writer = new Writer();
         writer.writeModule();
     }
@@ -156,7 +166,7 @@ public class ModuleList {
     /**
      * Sorts tasks by deadline.
      */
-    public static void sortTasks() {
+    public void sortTasks() {
         selectedModule.getTaskList().sort((task1, task2) -> {
             long daysRemaining1 = getDaysRemaining(task1.getDeadline());
             long daysRemaining2 = getDaysRemaining(task2.getDeadline());
@@ -171,7 +181,7 @@ public class ModuleList {
     /**
      * Sorts lesson list by lesson type.
      */
-    public static void sortLessons() {
+    public void sortLessons() {
         selectedModule.getLessonList().sort((lesson1, lesson2) -> {
             if (lesson1.getLessonType() != lesson2.getLessonType()) {
                 return lesson1.getLessonType().compareTo(lesson2.getLessonType());

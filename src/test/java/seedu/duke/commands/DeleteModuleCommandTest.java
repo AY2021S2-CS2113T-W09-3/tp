@@ -34,12 +34,13 @@ class DeleteModuleCommandTest {
         System.setIn(inContent);
 
         TestUtilAndConstants.removeFiles();
-        ModuleList.loadModuleNames();
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.loadModuleNames();
 
-        ModuleList.addModule(MODULE_CODE_1);
-        ModuleList.addModule(MODULE_CODE_4);
-        ModuleList.addModule(MODULE_CODE_3);
-        ModuleList.addModule(MODULE_CODE_2);
+        moduleList.addModule(MODULE_CODE_1);
+        moduleList.addModule(MODULE_CODE_4);
+        moduleList.addModule(MODULE_CODE_3);
+        moduleList.addModule(MODULE_CODE_2);
 
         Command command = new DeleteModuleCommand();
         command.execute(new UI());

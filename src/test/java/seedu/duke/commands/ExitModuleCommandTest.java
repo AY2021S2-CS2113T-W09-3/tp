@@ -12,10 +12,11 @@ public class ExitModuleCommandTest {
     //@@author 8kdesign
     @Test
     void execute_selectCloseModule_selectedEqualsNull() {
-        ModuleList.hardSetSelectedModule(MODULE_CODE_1);
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.hardSetSelectedModule(MODULE_CODE_1);
         ExitModuleCommand command = new ExitModuleCommand();
         command.execute(new UI());
-        assertNull(ModuleList.getSelectedModule());
+        assertNull(moduleList.getSelectedModule());
     }
     
 }

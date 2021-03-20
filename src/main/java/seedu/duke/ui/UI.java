@@ -74,10 +74,11 @@ public class UI {
      * Prints module indicator for user input.
      */
     public void printModuleIndicator() {
-        if (ModuleList.getSelectedModule() == null) {
+        ModuleList moduleList = ModuleList.getInstance();
+        if (moduleList.getSelectedModule() == null) {
             System.out.print(TAG_GULIO);
         } else {
-            String moduleCode = ModuleList.getSelectedModule().getModuleCode();
+            String moduleCode = moduleList.getSelectedModule().getModuleCode();
             System.out.printf(TAG_MODULE, moduleCode);
         }
     }
@@ -101,7 +102,8 @@ public class UI {
      * Prints all tasks in selected module's task list.
      */
     public void printAllTasks() {
-        Module module = ModuleList.getSelectedModule();
+        ModuleList moduleList = ModuleList.getInstance();
+        Module module = moduleList.getSelectedModule();
         printMessage(String.format(MESSAGE_TASKS_TO_LIST, module.getModuleCode()) + NEWLINE);
         printTasks(module.getTaskList(), false, false);
         printMessage("");

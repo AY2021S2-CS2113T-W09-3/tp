@@ -18,12 +18,13 @@ class AddLessonCommandTest extends LessonCommandTest {
     //@@author H-horizon
     @Test
     void execute_ui_expectPrintsCorrectOutput() {
+        ModuleList moduleList = ModuleList.getInstance();
         TestUtilAndConstants.removeFiles();
-        ModuleList.loadModuleNames();
+        moduleList.loadModuleNames();
 
         UI ui = new UI();
-        ModuleList.addModule(MODULE_CODE);
-        ModuleList.setSelectedModule(MODULE_CODE);
+        moduleList.addModule(MODULE_CODE);
+        moduleList.setSelectedModule(MODULE_CODE);
         Lesson newLesson = initialiseLesson(TEACHER_NAME, TEACHER_EMAIL, LessonType.TUTORIAL, TIME, ONLINE_LINK);
         Command command = new AddLessonCommand(newLesson);
 

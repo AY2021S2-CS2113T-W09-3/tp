@@ -23,13 +23,14 @@ class AddModuleCommandTest {
     //@@author isaharon
     @Test
     void execute_uniqueModuleCode_expectPrintSuccess() throws CommandException {
+        ModuleList moduleList = ModuleList.getInstance();
         System.setOut(new PrintStream(outContent));
 
         TestUtilAndConstants.removeFiles();
-        ModuleList.loadModuleNames();
+        moduleList.loadModuleNames();
 
-        ModuleList.addModule(MODULE_CODE_2);
-        ModuleList.addModule(MODULE_CODE_3);
+        moduleList.addModule(MODULE_CODE_2);
+        moduleList.addModule(MODULE_CODE_3);
 
         String moduleCode = MODULE_CODE_1;
         Command command = new AddModuleCommand(moduleCode);
@@ -43,12 +44,12 @@ class AddModuleCommandTest {
 
     @Test
     void execute_duplicateModuleCode_expectDuplicateModuleException() {
+        ModuleList moduleList = ModuleList.getInstance();
         System.setOut(new PrintStream(outContent));
-
-
+        
         TestUtilAndConstants.removeFiles();
-        ModuleList.loadModuleNames();
-        ModuleList.addModule(MODULE_CODE_1);
+        moduleList.loadModuleNames();
+        moduleList.addModule(MODULE_CODE_1);
 
         Command command = new AddModuleCommand(MODULE_CODE_1);
         assertThrows(CommandException.class, () -> command.execute(new UI()));

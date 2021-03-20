@@ -22,17 +22,18 @@ class ModuleInfoCommandTest extends LessonCommandTest {
     @Test
     void execute_ui_expectPrintsCorrectOutput() {
         TestUtilAndConstants.removeFiles();
-        ModuleList.loadModuleNames();
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.loadModuleNames();
         UI ui = new UI();
 
         OutputStream os = getOutputStream();
-        ModuleList.addModule(MODULE_CODE);
-        ModuleList.setSelectedModule(MODULE_CODE);
+        moduleList.addModule(MODULE_CODE);
+        moduleList.setSelectedModule(MODULE_CODE);
         addLessonsToList(ui);
         LocalDate deadline = LocalDate.parse("3-3-2021", FORMATTER);
         Task task = new Task("iP submission", deadline, "remember to attach JAR file");
         task.setGraded(true);
-        ArrayList<Task> tasksList = ModuleList.getSelectedModule().getTaskList();
+        ArrayList<Task> tasksList = moduleList.getSelectedModule().getTaskList();
         tasksList.add(task);
         removeOutputStream();
 

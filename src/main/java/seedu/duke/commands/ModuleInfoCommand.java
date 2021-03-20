@@ -28,7 +28,8 @@ public class ModuleInfoCommand extends Command {
      */
     @Override
     public void execute(UI ui) throws CommandException {
-        Module module = ModuleList.getSelectedModule();
+        ModuleList moduleList = ModuleList.getInstance();
+        Module module = moduleList.getSelectedModule();
         String moduleCode = module.getModuleCode();
         ui.printMessage(String.format(FORMAT_MODULE_INFO, moduleCode));
         ArrayList<Lesson> lessonList = module.getLessonList();

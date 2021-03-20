@@ -22,7 +22,8 @@ public class PrintHelpCommand extends Command {
      */
     @Override
     public void execute(UI ui) {
-        if (ModuleList.getSelectedModule() == null) {
+        ModuleList moduleList = ModuleList.getInstance();
+        if (moduleList.getSelectedModule() == null) {
             ui.printMessage(MESSAGE_DASHBOARD_HELP);
             DashboardCommands[] commands = DashboardCommands.values();
             ui.printMessage(getCommands(commands));

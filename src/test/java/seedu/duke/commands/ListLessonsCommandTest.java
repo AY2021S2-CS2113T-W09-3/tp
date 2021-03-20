@@ -24,12 +24,13 @@ class ListLessonsCommandTest extends LessonCommandTest {
     @Test
     void printLessonsFromList_lessonList_expectPrintsCorrectOutput() {
         TestUtilAndConstants.removeFiles();
-        ModuleList.loadModuleNames();
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.loadModuleNames();
         UI ui = new UI();
 
         OutputStream os = getOutputStream();
-        ModuleList.addModule(MODULE_CODE);
-        ModuleList.setSelectedModule(MODULE_CODE);
+        moduleList.addModule(MODULE_CODE);
+        moduleList.setSelectedModule(MODULE_CODE);
         addLessonsToList(ui);
         removeOutputStream();
 

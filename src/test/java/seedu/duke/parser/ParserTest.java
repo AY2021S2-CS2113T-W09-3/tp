@@ -26,7 +26,8 @@ class ParserTest {
     @Test
     // DASHBOARD COMMAND
     void parse_dashboardCommandAddModule_addCommandObject() throws UnknownCommandException, CommandException {
-        ModuleList.reset();
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.reset();
 
         Parser parser = new Parser();
         String input = "add CS2113T";
@@ -40,8 +41,9 @@ class ParserTest {
     // IN MODULE COMMAND
     // add lesson command
     void parse_inModuleCommandListTask_ListTask() throws UnknownCommandException, CommandException {
-        ModuleList.reset();
-        ModuleList.hardSetSelectedModule("CS1234");
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.reset();
+        moduleList.hardSetSelectedModule("CS1234");
 
         Parser parser = new Parser();
         String input = "tasks";
@@ -53,8 +55,9 @@ class ParserTest {
     @Test
     // add lesson command - all detail fields included
     void parse_inModuleCommandAddLessonFullDetails_addLessonObject() throws UnknownCommandException, CommandException {
-        ModuleList.reset();
-        ModuleList.hardSetSelectedModule("CS1234");
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.reset();
+        moduleList.hardSetSelectedModule("CS1234");
 
         Parser parser = new Parser();
         String input = "add lesson tutorial ;; Wednesday 9am-10am ;; www.zoom.com/1234 ;; Xianhao Cheng ;; " 

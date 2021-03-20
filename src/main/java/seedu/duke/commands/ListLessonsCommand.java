@@ -25,7 +25,8 @@ public class ListLessonsCommand extends Command {
      */
     @Override
     public void execute(UI ui) {
-        Module module = ModuleList.getSelectedModule();
+        ModuleList moduleList = ModuleList.getInstance();
+        Module module = moduleList.getSelectedModule();
         String moduleCode = module.getModuleCode();
         ui.printMessage(String.format(MESSAGE_LESSONS_TO_LIST, moduleCode));
         printLessons(module.getLessonList(), ui);

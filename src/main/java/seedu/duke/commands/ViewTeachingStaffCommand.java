@@ -23,7 +23,8 @@ public class ViewTeachingStaffCommand extends Command {
      */
     @Override
     public void execute(UI ui) {
-        Module module = ModuleList.getSelectedModule();
+        ModuleList moduleList = ModuleList.getInstance();
+        Module module = moduleList.getSelectedModule();
         String moduleCode = module.getModuleCode();
         ui.printMessage(String.format(MESSAGE_TEACHING_STAFF_TO_LIST, moduleCode));
         ArrayList<Lesson> lessonList = module.getLessonList();

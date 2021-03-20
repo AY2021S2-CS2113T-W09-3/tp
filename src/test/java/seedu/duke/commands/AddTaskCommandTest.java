@@ -35,11 +35,12 @@ public class AddTaskCommandTest {
         ByteArrayInputStream bis = new ByteArrayInputStream(input.getBytes());
         System.setIn(bis);
         System.setOut(new PrintStream(bos));
-
+        
+        ModuleList moduleList = ModuleList.getInstance();
         TestUtilAndConstants.removeFiles();
-        ModuleList.loadModuleNames();
-        ModuleList.addModule(MODULE_CODE_1);
-        ModuleList.setSelectedModule(MODULE_CODE_1);
+        moduleList.loadModuleNames();
+        moduleList.addModule(MODULE_CODE_1);
+        moduleList.setSelectedModule(MODULE_CODE_1);
 
         LocalDate deadline = LocalDate.parse("3-3-2021", FORMATTER);
         Task task = new Task("iP submission", deadline, "remember to attach JAR file");
@@ -55,10 +56,10 @@ public class AddTaskCommandTest {
         assertEquals(bos.toString(), output + NEWLINE);
 
         // checks if task was really added to task list
-        assertTrue(ModuleList.getSelectedModule().getTaskList().contains(task));
+        assertTrue(moduleList.getSelectedModule().getTaskList().contains(task));
 
         // checks if task's graded status was set correctly
-        assertEquals(true, ModuleList.getSelectedModule().getTaskList().get(0).getGraded());
+        assertEquals(true, moduleList.getSelectedModule().getTaskList().get(0).getGraded());
 
         System.setIn(originalIn);
         System.setOut(originalOut);
@@ -72,9 +73,10 @@ public class AddTaskCommandTest {
         System.setOut(new PrintStream(bos));
 
         TestUtilAndConstants.removeFiles();
-        ModuleList.loadModuleNames();
-        ModuleList.addModule(MODULE_CODE_1);
-        ModuleList.setSelectedModule(MODULE_CODE_1);
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.loadModuleNames();
+        moduleList.addModule(MODULE_CODE_1);
+        moduleList.setSelectedModule(MODULE_CODE_1);
 
         LocalDate deadline = LocalDate.parse("3-3-2021", FORMATTER);
         // remarks field is empty
@@ -90,10 +92,10 @@ public class AddTaskCommandTest {
         assertEquals(output + NEWLINE, bos.toString());
 
         // checks if task was really added to task list
-        assertTrue(ModuleList.getSelectedModule().getTaskList().contains(task));
+        assertTrue(moduleList.getSelectedModule().getTaskList().contains(task));
 
         // checks if task's graded status was set correctly
-        assertEquals(true, ModuleList.getSelectedModule().getTaskList().get(0).getGraded());
+        assertEquals(true, moduleList.getSelectedModule().getTaskList().get(0).getGraded());
 
         System.setIn(originalIn);
         System.setOut(originalOut);
@@ -109,9 +111,10 @@ public class AddTaskCommandTest {
         System.setOut(new PrintStream(bos));
 
         TestUtilAndConstants.removeFiles();
-        ModuleList.loadModuleNames();
-        ModuleList.addModule(MODULE_CODE_1);
-        ModuleList.setSelectedModule(MODULE_CODE_1);
+        ModuleList moduleList = ModuleList.getInstance();
+        moduleList.loadModuleNames();
+        moduleList.addModule(MODULE_CODE_1);
+        moduleList.setSelectedModule(MODULE_CODE_1);
 
         LocalDate deadline = LocalDate.parse("3-3-2021", FORMATTER);
         Task task = new Task("iP submission", deadline, "remember to attach JAR file");
@@ -128,10 +131,10 @@ public class AddTaskCommandTest {
         assertEquals(output + NEWLINE, bos.toString());
 
         // checks if task was really added to task list
-        assertTrue(ModuleList.getSelectedModule().getTaskList().contains(task));
+        assertTrue(moduleList.getSelectedModule().getTaskList().contains(task));
 
         // checks if task's graded status was set correctly
-        assertEquals(false, ModuleList.getSelectedModule().getTaskList().get(0).getGraded());
+        assertEquals(false, moduleList.getSelectedModule().getTaskList().get(0).getGraded());
 
         System.setIn(originalIn);
         System.setOut(originalOut);

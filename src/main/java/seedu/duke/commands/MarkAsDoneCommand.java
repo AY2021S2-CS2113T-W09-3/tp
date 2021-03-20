@@ -24,7 +24,8 @@ public class MarkAsDoneCommand extends Command {
      */
     @Override
     public void execute(UI ui) {
-        Module module = ModuleList.getSelectedModule();
+        ModuleList moduleList = ModuleList.getInstance();
+        Module module = moduleList.getSelectedModule();
         ArrayList<Task> undoneTasks = module.getDoneOrUndoneTasks(false);
         printPrompt(ui, undoneTasks);
         ArrayList<Task> selectedTasks = getSpecifiedTasks(ui, undoneTasks);
@@ -33,7 +34,7 @@ public class MarkAsDoneCommand extends Command {
             ui.printMessage(String.format(MESSAGE_MARKED_AS_DONE, description));
             module.markTask(task);
         }
-        ModuleList.writeModule();
+        moduleList.writeModule();
     }
 
     @Override
