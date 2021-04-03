@@ -131,14 +131,14 @@ public class Messages {
             + "Please follow the format strictly when adding/editing/removing lessons or tasks." + NEWLINE
             + "Do not edit anything above the line, as well as the line." + NEWLINE
             + "Please do not use '\\n' in any of the entries." + NEWLINE
-            + "Please do not use '|' except for separating fields." + NEWLINE
+            + "Please do not use ';;' except for separating fields." + NEWLINE
             + NEWLINE
             + "Choose 1 of the 4 formats for lessons:" + NEWLINE
-            + "1) lesson | <type> | <Day & Time>" + NEWLINE
-            + "2) lesson | <type> | <Day & Time> | <Link>" + NEWLINE
-            + "3) lesson | <type> | <Day & Time> | <Link> | <Teaching Staff Name>" + NEWLINE
-            + "4) lesson | <type> | <Day & Time> | <Link> | <Teaching Staff Name> | <Teaching Staff Email>" + NEWLINE
-            + NEWLINE
+            + "1) lesson ;; <type> ;; <Day & Time>" + NEWLINE
+            + "2) lesson ;; <type> ;; <Day & Time> ;; <Link>" + NEWLINE
+            + "3) lesson ;; <type> ;; <Day & Time> ;; <Link> ;; <Teaching Staff Name>" + NEWLINE
+            + "4) lesson ;; <type> ;; <Day & Time> ;; <Link> ;; <Teaching Staff Name> ;; <Teaching Staff Email>" 
+            + NEWLINE + NEWLINE
             + "Type: \"lecture\", \"tutorial\" or \"lab\"." + NEWLINE
             + "Day & time: When the lesson occurs." + NEWLINE
             + "Link: Online meeting link for the lesson." + NEWLINE
@@ -146,8 +146,8 @@ public class Messages {
             + "Teaching staff email: Email of teaching staff for the lesson." + NEWLINE
             + NEWLINE
             + "Choose 1 of the 2 formats for tasks:" + NEWLINE
-            + "1) task | <description> | <deadline> | <is done> | <is graded>" + NEWLINE
-            + "2) task | <description> | <deadline> | <is done> | <is graded> | <remarks>" + NEWLINE
+            + "1) task ;; <description> ;; <deadline> ;; <is done> ;; <is graded>" + NEWLINE
+            + "2) task ;; <description> ;; <deadline> ;; <is done> ;; <is graded> ;; <remarks>" + NEWLINE
             + NEWLINE
             + "Description: Name/description of the task." + NEWLINE
             + "Deadline: In the format DD-MM-YYYY." + NEWLINE

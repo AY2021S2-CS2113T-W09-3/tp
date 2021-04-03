@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static seedu.duke.common.CommonMethods.writeLog;
-import static seedu.duke.common.Constants.DIVIDER_READ;
+import static seedu.duke.common.Constants.DELIM;
 import static seedu.duke.common.Constants.EMPTY_STRING;
 import static seedu.duke.common.Constants.ENTRY_LESSON_EXTRA_LONG;
 import static seedu.duke.common.Constants.ENTRY_LESSON_LONG;
@@ -126,7 +126,7 @@ public class Loader {
      * @param module Module to add data to.
      */
     private void readLessonData(String input, Module module) {
-        String[] fields = input.split(DIVIDER_READ);
+        String[] fields = input.split(DELIM);
         if (!ENTRY_SIZE_LESSON.contains(fields.length)) {
             //Invalid format
             return;
@@ -163,7 +163,7 @@ public class Loader {
      * @param module Module to add data to.
      */
     private void readTaskData(String input, Module module) {
-        String[] fields = input.split(DIVIDER_READ);
+        String[] fields = input.split(DELIM);
         if (!ENTRY_SIZE_TASK.contains(fields.length)) {
             //Invalid format
             return;

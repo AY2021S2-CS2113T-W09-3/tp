@@ -610,17 +610,17 @@ Files can be modified outside of the program. Invalid inputs will not be loaded 
 
 #### Format for Lessons:
 
-1. `lesson | <type> | <Day & Time>`
-1. `lesson | <type> | <Day & Time> | <Link>`
-1. `lesson | <type> | <Day & Time> | <Link> | <Teaching Staff Name>`
-1. `lesson | <type> | <Day & Time> | <Link> | <Teaching Staff Name> | <Teaching Staff Email>`
+1. `lesson ;; <type> ;; <Day & Time>`
+1. `lesson ;; <type> ;; <Day & Time> ;; <Link>`
+1. `lesson ;; <type> ;; <Day & Time> ;; <Link> ;; <Teaching Staff Name>`
+1. `lesson ;; <type> ;; <Day & Time> ;; <Link> ;; <Teaching Staff Name> ;; <Teaching Staff Email>`
 
 > ⚠ Only accepts 3 lesson types: “lecture”, “lab” and “tutorial”.
 
 #### Format for Tasks:
 
-1. `task | <description> | <deadline> | <is done> | <is graded>`
-1. `task | <description> | <deadline> | <is done> | <is graded> | <remarks>`
+1. `task ;; <description> ;; <deadline> ;; <is done> ;; <is graded>`
+1. `task ;; <description> ;; <deadline> ;; <is done> ;; <is graded> ;; <remarks>`
 
 > ⚠ For `<is done>` and `<is graded>`, use ‘T’ for true and ‘F’ for false.
 

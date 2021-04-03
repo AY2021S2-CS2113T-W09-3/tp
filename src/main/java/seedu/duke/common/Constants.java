@@ -97,10 +97,9 @@ public class Constants {
     public static final String FOLDER_PATH = "Data";
     public static final String TXT_FORMAT = ".txt";
     public static final String STOP_LINE = "------------";
-    public static final String DIVIDER_READ = "\\|";
-    public static final String DIVIDER_WRITE = " | ";
-    public static final String KEYWORD_LESSON = "lesson | ";
-    public static final String KEYWORD_TASK = "task | ";
+    public static final String DIVIDER_WRITE = " ;; ";
+    public static final String KEYWORD_LESSON = "lesson ;; ";
+    public static final String KEYWORD_TASK = "task ;; ";
     public static final String TRUE_STRING = "T";
     public static final String FALSE_STRING = "F";
 
